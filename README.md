@@ -1,30 +1,30 @@
-# Personal Bonzai Command Tree (Monolith)
+# Personal Bonzai Commandz
 
-[![GoDoc](https://godoc.org/github.com/rwxrob/cmds?status.svg)](https://godoc.org/github.com/rwxrob/cmds)
+[![GoDoc](https://godoc.org/github.com/rwxrob/cmds?status.svg)](https://godoc.org/github.com/rwxrob/z)
 [![License](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](LICENSE)
 
 These days I prefer to maintain a single Go monolith command utility
-with everything I would have used shell scripts for before. I created
-[Bonzai](https://github.com/rwxrob/bonzai) specifically for this sort of
-thing. This way I just have to copy a single binary over to whatever
-system I'm working on and I have all of my favorite functionality on
-*any* device that Go supports with zero compatibility hassles and
-installation dependencies. It just works, and by works I mean
-*anywhere*. Hell, I don't even need a container (but can easily make a
-FROM SCRATCH container with nothing but `cmds` in it). If I want a
-subset of the commands I just trim the tree and compose them into a
-different monolith --- in minutes.
+rather than a ton of shell scripts in whatever languages. In fact, I
+created [Bonzai](https://github.com/rwxrob/bonzai) specifically for this
+sort of thing. I just `curl` down a single binary to whatever system I'm
+on and I have all of my favorite functionality on *any* device with zero
+compatibility hassles and installation dependencies. Everything just
+works, *anywhere*. To update just make sure you have an Internet
+connection and `z update`.
 
 ## Install
 
 ```
-go install github.com/rwxrob/cmds@latest
+go install github.com/rwxrob/z@latest
 ```
 
-I have `z` hard link as well to keep things easy to type.
+I prefer to use `z` instead of setting up a multicall binary since the
+habits it builds into my muscle memory work on any operating system or
+device and it doesn't take too much space when using UNIX pipelines and
+such:
 
 ```
-ln "$GOBIN/cmds" "$GOBIN/z"
+echo $(z isosec) $(z yaml2json quotes.yaml | jq -r .mad )
 ```
 
 ## Tab Completion
@@ -34,7 +34,6 @@ To activate bash completion just use the `complete -C` option from your
 completion is done by the program itself.
 
 ```
-complete -C cmds cmds
 complete -C z z
 ```
 
