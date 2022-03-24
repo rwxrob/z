@@ -1,0 +1,19 @@
+go 1.18
+
+// Add relative paths to repos of things you don't want to `go get`
+// every time. Always include . or example tests requiring full
+// references to package imports will fail. Read go work -h for more.
+// Packages upon which bonzai depends have been included for convenience
+// but can be removed without worry by most.
+
+use (
+	.
+	../bonzai
+	../fn
+	../fs
+	../json
+	../scan
+	../structs
+	../term
+	../to
+)
