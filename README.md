@@ -1,39 +1,30 @@
-# Bonzai™ Sample `foo` Command (Template)
+# Personal Bonzai Command Tree (Monolith)
 
-*Create a new GitHub project using this template and change this
-README.md to match your project. Make all your template changes before
-making your first commit.*
-
-![WIP](https://img.shields.io/badge/status-wip-red)
-![Go Version](https://img.shields.io/github/go-mod/go-version/rwxrob/foo)
-[![GoDoc](https://godoc.org/github.com/rwxrob/foo?status.svg)](https://godoc.org/github.com/rwxrob/foo)
+[![GoDoc](https://godoc.org/github.com/rwxrob/cmds?status.svg)](https://godoc.org/github.com/rwxrob/cmds)
 [![License](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](LICENSE)
+
+These days I prefer to maintain a single Go monolith command utility
+with everything I would have used shell scripts for before. I created
+[Bonzai](https://github.com/rwxrob/bonzai) specifically for this sort of
+thing. This way I just have to copy a single binary over to whatever
+system I'm working on and I have all of my favorite functionality on
+*any* device that Go supports with zero compatibility hassles and
+installation dependencies. It just works, and by works I mean
+*anywhere*. Hell, I don't even need a container (but can easily make a
+FROM SCRATCH container with nothing but `cmds` in it). If I want a
+subset of the commands I just trim the tree and compose them into a
+different monolith --- in minutes.
 
 ## Install
 
-This command can be installed as a standalone program or composed into 
-a Bonzai command tree.
-
-Standalone
-
 ```
-go install github.com/rwxrob/foo/foo@latest
+go install github.com/rwxrob/cmds@latest
 ```
 
-Composed
+I have `z` hard link as well to keep things easy to type.
 
-```go
-package cmds
-
-import (
-	"github.com/rwxrob/bonzai"
-	"github.com/rwxrob/foo"
-)
-
-var Cmd = &bonzai.Cmd{
-	Name:     `cmds`,
-	Commands: []*bonzai.Cmd{help.Cmd, foo.Cmd},
-}
+```
+ln "$GOBIN/cmds" "$GOBIN/z"
 ```
 
 ## Tab Completion
@@ -43,7 +34,8 @@ To activate bash completion just use the `complete -C` option from your
 completion is done by the program itself.
 
 ```
-complete -C foo foo
+complete -C cmds cmds
+complete -C z z
 ```
 
 If you don't have bash or tab completion check use the shortcut
