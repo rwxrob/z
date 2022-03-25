@@ -14,6 +14,10 @@ connection and `z update`.
 
 ## Install
 
+Note: you'll have to remove `go.work` yourself if you want to use this
+build yourself (or clone all my structure the same way). I'm saving my
+`go.work` in this Go repo only because it is a personal build.
+
 ```
 go install github.com/rwxrob/z@latest
 ```
