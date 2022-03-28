@@ -1,14 +1,22 @@
 package main
 
 import (
+	"log"
+
+	"github.com/rwxrob/bonzai"
 	Z "github.com/rwxrob/bonzai"
 	"github.com/rwxrob/bonzai/inc/help"
 	"github.com/rwxrob/config"
 	"github.com/rwxrob/twitch"
-	"github.com/rwxrob/yaml2json"
+	"github.com/rwxrob/y2j"
 )
 
 func main() {
+	log.SetFlags(0)
+	bonzai.Aliases = map[string][]string{
+		"status":  {"tmux", "update"},
+		"project": {"twitch", "bot", "commands", "edit", "project"},
+	}
 	Cmd.Run()
 }
 
@@ -19,6 +27,6 @@ var Cmd = &Z.Cmd{
 	Copyright: `Copyright 2021 Robert S Muhlestein`,
 	License:   `Apache-2.0`,
 	Commands: []*Z.Cmd{
-		help.Cmd, yaml2json.Cmd, twitch.Cmd, config.Cmd, tmux,
+		help.Cmd, config.Cmd, y2j.Cmd, twitch.Cmd, tmux,
 	},
 }

@@ -3,9 +3,13 @@ go 1.19
 use (
 	.
 	../bonzai
-	../fs
 	../config
+	../fs
+	../json
+	../fn
 	../term
+	../to
 	../twitch
-	../yaml2json
+	../y2j
+	../yq
 )
