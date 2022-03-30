@@ -7,6 +7,7 @@ import (
 	"github.com/rwxrob/bonzai/inc/help"
 	"github.com/rwxrob/config"
 	"github.com/rwxrob/twitch"
+	"github.com/rwxrob/uniq"
 	"github.com/rwxrob/y2j"
 	"github.com/rwxrob/yq"
 )
@@ -40,6 +41,9 @@ func main() {
 		"work":     {"go", "work"},
 		"chat":     {"twitch", "chat"},
 		"afk":      {"twitch", "chat", "!afk"},
+		"isosec":   {"uniq", "isosec"},
+		"uuid":     {"uniq", "uuid"},
+		"epoch":    {"uniq", "second"},
 	}
 	Cmd.Run()
 
@@ -52,6 +56,6 @@ var Cmd = &Z.Cmd{
 	Copyright: `Copyright 2021 Robert S Muhlestein`,
 	License:   `Apache-2.0`,
 	Commands: []*Z.Cmd{
-		help.Cmd, config.Cmd, y2j.Cmd, twitch.Cmd, tmux, yq.Cmd, golang,
+		help.Cmd, config.Cmd, y2j.Cmd, twitch.Cmd, tmux, yq.Cmd, golang, uniq.Cmd,
 	},
 }

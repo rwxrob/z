@@ -7,6 +7,7 @@ require (
 	github.com/rwxrob/config v0.3.1
 	github.com/rwxrob/fs v0.4.3
 	github.com/rwxrob/twitch v0.2.3
+	github.com/rwxrob/uniq v0.1.0
 	github.com/rwxrob/y2j v0.3.1
 	github.com/rwxrob/yq v0.2.0
 )
