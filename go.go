@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	Z "github.com/rwxrob/bonzai"
 	"github.com/rwxrob/bonzai/inc/help"
@@ -12,8 +14,9 @@ import (
 var golang = &Z.Cmd{
 	Name:     `go`,
 	Summary:  `go related helper actions`,
+	Aliases:  []string{"rust"},
 	MinArgs:  1,
-	Commands: []*Z.Cmd{help.Cmd, gowork},
+	Commands: []*Z.Cmd{help.Cmd, gowork, genisrune},
 }
 
 var gowork = &Z.Cmd{
@@ -38,6 +41,21 @@ var gowork = &Z.Cmd{
 		default:
 			return x.UsageError()
 		}
+		return nil
+	},
+}
+
+var genisrune = &Z.Cmd{
+	Name:     `genisrune`,
+	Summary:  `generate a performant rune check condition`,
+	Commands: []*Z.Cmd{help.Cmd},
+	MinArgs:  1,
+	Call: func(x *Z.Cmd, args ...string) error {
+		var conds []string
+		for _, r := range args[0] {
+			conds = append(conds, fmt.Sprintf("r==%q", r))
+		}
+		fmt.Println(strings.Join(conds, "||"))
 		return nil
 	},
 }

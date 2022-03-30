@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 
-	"github.com/rwxrob/bonzai"
 	Z "github.com/rwxrob/bonzai"
 	"github.com/rwxrob/bonzai/inc/help"
 	"github.com/rwxrob/config"
@@ -14,14 +13,36 @@ import (
 
 func main() {
 	log.SetFlags(0)
-	bonzai.Aliases = map[string][]string{
+
+	// can run in multicall, or monolith, not both
+
+	/*
+
+		// MULTICALL (status, afk, etc. linked)
+		// (no completion unless set for individual commands)
+		// (requires creation of hard/sym links or copies)
+		Z.Commands = map[string][]any{
+			// "config": {config.Cmd}, // bork cuz no multicall mode
+			"yq":     {yq.Cmd},
+			"y2j":    {y2j.Cmd},
+			"status": {tmux, "update"},
+			"afk":    {twitch.Cmd, "chat", "!afk"},
+		}
+		Z.Run()
+
+	*/
+
+	// MONOLITH (z) - which I prefer
+	Z.Aliases = map[string][]string{
 		"status":   {"tmux", "update"},
 		"project":  {"twitch", "bot", "commands", "edit", "project"},
 		"commands": {"twitch", "bot", "commands"},
 		"work":     {"go", "work"},
 		"chat":     {"twitch", "chat"},
+		"afk":      {"twitch", "chat", "!afk"},
 	}
 	Cmd.Run()
+
 }
 
 var Cmd = &Z.Cmd{
