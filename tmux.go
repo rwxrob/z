@@ -3,8 +3,8 @@ package main
 import (
 	"strings"
 
-	Z "github.com/rwxrob/bonzai"
-	"github.com/rwxrob/bonzai/inc/help"
+	"github.com/rwxrob/bonzai/help"
+	Z "github.com/rwxrob/bonzai/z"
 )
 
 var tmux = &Z.Cmd{

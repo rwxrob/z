@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	Z "github.com/rwxrob/bonzai"
-	"github.com/rwxrob/bonzai/inc/help"
+	"github.com/rwxrob/bonzai/help"
+	Z "github.com/rwxrob/bonzai/z"
 	"github.com/rwxrob/config"
 	"github.com/rwxrob/twitch"
 	"github.com/rwxrob/uniq"
@@ -37,7 +37,8 @@ func main() {
 	Z.Aliases = map[string][]string{
 		"status":   {"tmux", "update"},
 		"project":  {"twitch", "bot", "commands", "edit", "project"},
-		"commands": {"twitch", "bot", "commands"},
+		"commands": {"twitch", "bot", "commands", "file", "edit"},
+		"sync":     {"twitch", "bot", "commands", "sync"},
 		"work":     {"go", "work"},
 		"chat":     {"twitch", "chat"},
 		"afk":      {"twitch", "chat", "!afk"},

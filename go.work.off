@@ -3,7 +3,14 @@ go 1.19
 use (
 	.
 	../bonzai
+	../config
+	../fn
 	../fs
-  ../twitch
-  ../uniq
+	../scan
+	../term
+	../to
+	../twitch
+	../uniq
+	../y2j
+	../yq
 )
