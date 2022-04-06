@@ -3,10 +3,10 @@ module github.com/rwxrob/z
 go 1.18
 
 require (
-	github.com/rwxrob/bonzai v0.1.2
+	github.com/rwxrob/bonzai v0.1.4
 	github.com/rwxrob/config v0.3.5
 	github.com/rwxrob/fs v0.4.4
-	github.com/rwxrob/twitch v0.2.6
+	github.com/rwxrob/twitch v0.2.7
 	github.com/rwxrob/uniq v0.1.4
 	github.com/rwxrob/y2j v0.3.4
 	github.com/rwxrob/yq v0.2.3
@@ -27,14 +27,14 @@ require (
 	github.com/rwxrob/json v0.5.1 // indirect
 	github.com/rwxrob/scan v0.6.1 // indirect
 	github.com/rwxrob/structs v0.5.1 // indirect
-	github.com/rwxrob/term v0.2.3 // indirect
+	github.com/rwxrob/term v0.2.5 // indirect
 	github.com/rwxrob/to v0.4.5 // indirect
 	github.com/timtadh/data-structures v0.5.3 // indirect
 	github.com/timtadh/lexmachine v0.2.2 // indirect
 	golang.org/x/crypto v0.0.0-20220331220935-ae2d96664a29 // indirect
 	golang.org/x/mod v0.5.1 // indirect
 	golang.org/x/net v0.0.0-20220403103023-749bd193bc2b // indirect
-	golang.org/x/sys v0.0.0-20220405210540-1e041c57c461 // indirect
+	golang.org/x/sys v0.0.0-20220406163625-3f8b81556e12 // indirect
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
