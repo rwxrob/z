@@ -3,7 +3,9 @@ go 1.19
 use (
 	.
 	../bonzai
+	../help
 	../config
+	../update
 	../fn
 	../fs
 	../scan

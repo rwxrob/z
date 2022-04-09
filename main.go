@@ -1,19 +1,24 @@
 package main
 
 import (
-	"log"
-
-	"github.com/rwxrob/bonzai/help"
 	Z "github.com/rwxrob/bonzai/z"
 	"github.com/rwxrob/config"
+	"github.com/rwxrob/help"
 	"github.com/rwxrob/twitch"
 	"github.com/rwxrob/uniq"
+
+	//"github.com/rwxrob/update"
 	"github.com/rwxrob/y2j"
 	"github.com/rwxrob/yq"
 )
 
 func main() {
-	log.SetFlags(0)
+
+	// remove log prefixes
+	// log.SetFlags(0)
+
+	// provide panic trace
+	Z.AllowPanic = true
 
 	// can run in multicall, or monolith, not both
 
@@ -46,6 +51,7 @@ func main() {
 		"uuid":     {"uniq", "uuid"},
 		"epoch":    {"uniq", "second"},
 	}
+
 	Cmd.Run()
 
 }
@@ -53,10 +59,17 @@ func main() {
 var Cmd = &Z.Cmd{
 	Name:      `z`,
 	Summary:   `rwxrob's bonzai command tree`,
-	Version:   `v0.0.1`,
+	Version:   `v0.1.5`,
 	Copyright: `Copyright 2021 Robert S Muhlestein`,
 	License:   `Apache-2.0`,
 	Commands: []*Z.Cmd{
-		help.Cmd, config.Cmd, y2j.Cmd, twitch.Cmd, tmux, yq.Cmd, golang, uniq.Cmd,
+		help.Cmd, config.Cmd, y2j.Cmd, twitch.Cmd, tmux, yq.Cmd, golang,
+		uniq.Cmd, //update.Cmd,
 	},
+	Description: `
+		Hi, I'm rwxrob <http://rwxrob.tv> and this is my Bonzai™ tree. I am
+		slowly replacing all my shell scripts and other Go utilities with
+		Bonzai branches that I graft into this *z* command. You are welcome
+		to play around with it, but please know that I am radically changing
+		things *daily*.`,
 }

@@ -6,17 +6,19 @@ import (
 	"os"
 	"strings"
 
-	"github.com/rwxrob/bonzai/help"
 	Z "github.com/rwxrob/bonzai/z"
+	"github.com/rwxrob/fs/dir"
 	"github.com/rwxrob/fs/file"
+	"github.com/rwxrob/help"
+	"github.com/rwxrob/term"
+	"gopkg.in/yaml.v3"
 )
 
 var golang = &Z.Cmd{
 	Name:     `go`,
 	Summary:  `go related helper actions`,
-	Aliases:  []string{"rust"},
 	MinArgs:  1,
-	Commands: []*Z.Cmd{help.Cmd, gowork, genisrune},
+	Commands: []*Z.Cmd{help.Cmd, gowork, genisrune, sh2slice, godist},
 }
 
 var gowork = &Z.Cmd{
@@ -56,6 +58,85 @@ var genisrune = &Z.Cmd{
 			conds = append(conds, fmt.Sprintf("r==%q", r))
 		}
 		fmt.Println(strings.Join(conds, "||"))
+		return nil
+	},
+}
+
+var sh2slice = &Z.Cmd{
+	Name:     `sh2slice`,
+	Summary:  `splits a shell command into arguments`,
+	Commands: []*Z.Cmd{help.Cmd},
+	Call: func(_ *Z.Cmd, args ...string) error {
+		list := []string{}
+		if len(args) == 0 {
+			args = append(args, term.Read())
+		}
+		for _, a := range args {
+			// FIXME add awareness or globs and quoted segments
+			for _, aa := range strings.Fields(a) {
+				list = append(list, fmt.Sprintf("%q", aa))
+			}
+		}
+		fmt.Println(strings.Join(list, ","))
+		return nil
+	},
+}
+
+func _build(args ...string) error {
+	a := []string{`go`, `build`}
+	a = append(a, args...)
+	return Z.Exec(a...)
+}
+
+var godist = &Z.Cmd{
+	Name:     `dist`,
+	Summary:  `go distribution related commands`,
+	Commands: []*Z.Cmd{godistbuild},
+}
+
+type GoBuildParams struct {
+	Targets []GoBuildTarget
+	O       map[string]any `yaml:",inline"`
+}
+
+type GoBuildTarget struct {
+	OS   string
+	Arch []string
+}
+
+var godistbuild = &Z.Cmd{
+	Name:     `build`,
+	Summary:  `build for for multiple architectures into dist dir`,
+	Commands: []*Z.Cmd{help.Cmd},
+	Description: `
+			This build looks for a build.yaml file in the current directory
+			and runs the build command on each building them all concurrently
+			into the *dist* directory where they are ready for upload to
+			GitHub as a release. Just add a README.md and run release.
+	`,
+	Call: func(_ *Z.Cmd, args ...string) error {
+		if !file.Exists(`build.yaml`) {
+			return _build(args...)
+		}
+		buf, err := os.ReadFile(`build.yaml`)
+		if err != nil {
+			return err
+		}
+		p := new(GoBuildParams)
+		if err := yaml.Unmarshal(buf, p); err != nil {
+			return err
+		}
+		os.RemoveAll(`dist`)
+		dir.Create(`dist`)
+		for _, target := range p.Targets {
+			for _, arch := range target.Arch {
+				log.Printf("Building for %v/%v", target.OS, arch)
+				name := fmt.Sprintf("%v_%v_%v", dir.Name(), target.OS, arch)
+				os.Setenv(`GOOS`, target.OS)
+				os.Setenv(`GOARCH`, arch)
+				_build(`-o`, `dist/`+name)
+			}
+		}
 		return nil
 	},
 }
