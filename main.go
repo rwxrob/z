@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	Z "github.com/rwxrob/bonzai/z"
 	"github.com/rwxrob/config"
 	"github.com/rwxrob/help"
@@ -15,7 +17,7 @@ import (
 func main() {
 
 	// remove log prefixes
-	// log.SetFlags(0)
+	log.SetFlags(0)
 
 	// provide panic trace
 	Z.AllowPanic = true
