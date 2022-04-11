@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"text/template"
 
 	Z "github.com/rwxrob/bonzai/z"
 	"github.com/rwxrob/config"
@@ -10,6 +11,7 @@ import (
 	"github.com/rwxrob/uniq"
 
 	//"github.com/rwxrob/update"
+	"github.com/rwxrob/vars"
 	"github.com/rwxrob/y2j"
 	"github.com/rwxrob/yq"
 )
@@ -61,17 +63,40 @@ func main() {
 var Cmd = &Z.Cmd{
 	Name:      `z`,
 	Summary:   `rwxrob's bonzai command tree`,
-	Version:   `v0.1.5`,
+	Version:   `v0.2.2`,
 	Copyright: `Copyright 2021 Robert S Muhlestein`,
 	License:   `Apache-2.0`,
+	Site:      `rwxrob.tv`,
+	Source:    `git@github.com:rwxrob/z.git`,
+	Issues:    `github.com/rwxrob/z/issues`,
+
 	Commands: []*Z.Cmd{
 		help.Cmd, config.Cmd, y2j.Cmd, twitch.Cmd, tmux, yq.Cmd, golang,
-		uniq.Cmd, //update.Cmd,
+		uniq.Cmd, vars.Cmd, //update.Cmd,
 	},
+
+	Dynamic: template.FuncMap{
+		"uname": func() string { return Z.Out("uname", "-a") },
+		"ls":    func() string { return Z.Out("ls", "-l", "-h") },
+	},
+
 	Description: `
-		Hi, I'm rwxrob <http://rwxrob.tv> and this is my Bonzai™ tree. I am
-		slowly replacing all my shell scripts and other Go utilities with
-		Bonzai branches that I graft into this *z* command. You are welcome
+		Hi, I'm rwxrob.tv and this is my Bonzai™ tree. I am slowly
+		replacing all my shell scripts and other Go utilities with Bonzai
+		branches that I graft into this **{{.Name}}** command. You are welcome
 		to play around with it, but please know that I am radically changing
-		things *daily*.`,
+		things *daily*.
+
+		Also check out https://github.com/rwxrob/foo for a sample template
+		Bonzai tree to get started on your own.
+
+		Here's some random output from the Dynamic *ls* function piped to
+		the builtin *indent* function using {{ "{{ ls | indent 4 }}" }} Go
+		template syntax:
+
+		{{ ls | indent 4 }}
+		
+		That was a verbatim block because of the indent.
+
+		`,
 }

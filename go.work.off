@@ -4,7 +4,8 @@ use (
 	.
 	../bonzai
 	../help
-	../config
+	//../config
+	../vars
 	../update
 	../fn
 	../fs

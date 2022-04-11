@@ -5,12 +5,13 @@ import (
 
 	Z "github.com/rwxrob/bonzai/z"
 	"github.com/rwxrob/help"
+	"github.com/rwxrob/vars"
 )
 
 var tmux = &Z.Cmd{
 	Name:     `tmux`,
 	Summary:  `make tmux updates`,
-	Commands: []*Z.Cmd{help.Cmd, tmuxUpdate},
+	Commands: []*Z.Cmd{help.Cmd, tmuxUpdate, vars.Cmd},
 }
 
 var tmuxUpdate = &Z.Cmd{
