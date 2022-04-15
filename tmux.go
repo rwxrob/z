@@ -11,7 +11,26 @@ import (
 var tmux = &Z.Cmd{
 	Name:     `tmux`,
 	Summary:  `make tmux updates`,
-	Commands: []*Z.Cmd{help.Cmd, tmuxUpdate, vars.Cmd},
+	Commands: []*Z.Cmd{help.Cmd, tmuxUpdate, vars.Cmd, in},
+}
+
+var in = &Z.Cmd{
+	Name:     `in`,
+	Summary:  `exec a nested tmux session (unset TMUX)`,
+	Usage:    `[help|<tmuxarg>...]`,
+	Commands: []*Z.Cmd{help.Cmd},
+	Call: func(_ *Z.Cmd, args ...string) error {
+		home, err := os.UserHomeDir()
+		if err != nil {
+			return err
+		}
+		conf := path.Join(home, `.tmux.conf`)
+		tmuxargs := []string{`tmux`, `-f`, conf, `-u`}
+		tmuxargs = append(tmuxargs, args...)
+		os.Unsetenv(`TMUX`)
+		Z.SysExec(tmuxargs...)
+		return nil
+	},
 }
 
 var tmuxUpdate = &Z.Cmd{
