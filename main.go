@@ -5,12 +5,10 @@ import (
 	"text/template"
 
 	Z "github.com/rwxrob/bonzai/z"
-	"github.com/rwxrob/config"
+	"github.com/rwxrob/conf"
 	"github.com/rwxrob/help"
 	"github.com/rwxrob/twitch"
 	"github.com/rwxrob/uniq"
-
-	//"github.com/rwxrob/update"
 	"github.com/rwxrob/vars"
 	"github.com/rwxrob/y2j"
 	"github.com/rwxrob/yq"
@@ -32,7 +30,7 @@ func main() {
 		// (no completion unless set for individual commands)
 		// (requires creation of hard/sym links or copies)
 		Z.Commands = map[string][]any{
-			// "config": {config.Cmd}, // bork cuz no multicall mode
+			// "conf": {conf.Cmd}, // bork cuz no multicall mode
 			"yq":     {yq.Cmd},
 			"y2j":    {y2j.Cmd},
 			"status": {tmux, "update"},
@@ -43,17 +41,19 @@ func main() {
 	*/
 
 	// MONOLITH (z) - which I prefer
-	Z.Aliases = map[string][]string{
-		"status":   {"tmux", "update"},
-		"project":  {"twitch", "bot", "commands", "edit", "project"},
-		"commands": {"twitch", "bot", "commands", "file", "edit"},
-		"sync":     {"twitch", "bot", "commands", "sync"},
-		"work":     {"go", "work"},
-		"chat":     {"twitch", "chat"},
-		"afk":      {"twitch", "chat", "!afk"},
-		"isosec":   {"uniq", "isosec"},
-		"uuid":     {"uniq", "uuid"},
-		"epoch":    {"uniq", "second"},
+	Z.Shortcuts = map[string][]string{
+		"status":    {"tmux", "update"},
+		"offscreen": {"chat", "!offscreen"},
+		"project":   {"twitch", "bot", "commands", "edit", "project"},
+		"commands":  {"twitch", "bot", "commands", "file", "edit"},
+		"sync":      {"twitch", "bot", "commands", "sync"},
+		"work":      {"go", "work"},
+		"chat":      {"twitch", "chat"},
+		"afk":       {"twitch", "chat", "!afk"},
+		"isosec":    {"uniq", "isosec"},
+		"isonan":    {"uniq", "isonan"},
+		"uuid":      {"uniq", "uuid"},
+		"epoch":     {"uniq", "second"},
 	}
 
 	Cmd.Run()
@@ -71,8 +71,8 @@ var Cmd = &Z.Cmd{
 	Issues:    `github.com/rwxrob/z/issues`,
 
 	Commands: []*Z.Cmd{
-		help.Cmd, config.Cmd, y2j.Cmd, twitch.Cmd, tmux, yq.Cmd, golang,
-		uniq.Cmd, vars.Cmd, //update.Cmd,
+		help.Cmd, conf.Cmd, vars.Cmd, y2j.Cmd, twitch.Cmd, tmux, yq.Cmd, golang,
+		uniq.Cmd, //github.Cmd, //update.Cmd,
 	},
 
 	Dynamic: template.FuncMap{
@@ -83,7 +83,7 @@ var Cmd = &Z.Cmd{
 	Description: `
 		Hi, I'm rwxrob.tv and this is my Bonzai™ tree. I am slowly
 		replacing all my shell scripts and other Go utilities with Bonzai
-		branches that I graft into this **{{.Name}}** command. You are welcome
+		branches that I graft into this {{cmd .Name}} command. You are welcome
 		to play around with it, but please know that I am radically changing
 		things *daily*.
 

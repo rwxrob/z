@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+	"path"
 	"strings"
 
 	Z "github.com/rwxrob/bonzai/z"
