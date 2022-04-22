@@ -63,7 +63,7 @@ func main() {
 var Cmd = &Z.Cmd{
 	Name:      `z`,
 	Summary:   `rwxrob's bonzai command tree`,
-	Version:   `v0.2.2`,
+	Version:   `v0.3.0`,
 	Copyright: `Copyright 2021 Robert S Muhlestein`,
 	License:   `Apache-2.0`,
 	Site:      `rwxrob.tv`,
