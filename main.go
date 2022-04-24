@@ -7,6 +7,7 @@ import (
 	Z "github.com/rwxrob/bonzai/z"
 	"github.com/rwxrob/conf"
 	"github.com/rwxrob/help"
+	"github.com/rwxrob/pomo"
 	"github.com/rwxrob/twitch"
 	"github.com/rwxrob/uniq"
 	"github.com/rwxrob/vars"
@@ -40,11 +41,29 @@ func main() {
 
 	*/
 
-	// MONOLITH (z) - which I prefer
-	Z.Shortcuts = map[string][]string{
+	Cmd.Run()
+
+}
+
+var Cmd = &Z.Cmd{
+	Name:      `z`,
+	Summary:   `rwxrob's bonzai command tree`,
+	Version:   `v0.4.0`,
+	Copyright: `Copyright 2021 Robert S Muhlestein`,
+	License:   `Apache-2.0`,
+	Site:      `rwxrob.tv`,
+	Source:    `git@github.com:rwxrob/z.git`,
+	Issues:    `github.com/rwxrob/z/issues`,
+
+	Commands: []*Z.Cmd{
+		help.Cmd, conf.Cmd, vars.Cmd, y2j.Cmd, twitch.Cmd, tmux, yq.Cmd, golang,
+		uniq.Cmd, pomo.Cmd, //github.Cmd, //update.Cmd,
+	},
+
+	Shortcuts: Z.ArgMap{
+		"project":   {"twitch", "bot", "commands", "edit", "project"},
 		"status":    {"tmux", "update"},
 		"offscreen": {"chat", "!offscreen"},
-		"project":   {"twitch", "bot", "commands", "edit", "project"},
 		"commands":  {"twitch", "bot", "commands", "file", "edit"},
 		"sync":      {"twitch", "bot", "commands", "sync"},
 		"work":      {"go", "work"},
@@ -54,25 +73,6 @@ func main() {
 		"isonan":    {"uniq", "isonan"},
 		"uuid":      {"uniq", "uuid"},
 		"epoch":     {"uniq", "second"},
-	}
-
-	Cmd.Run()
-
-}
-
-var Cmd = &Z.Cmd{
-	Name:      `z`,
-	Summary:   `rwxrob's bonzai command tree`,
-	Version:   `v0.3.0`,
-	Copyright: `Copyright 2021 Robert S Muhlestein`,
-	License:   `Apache-2.0`,
-	Site:      `rwxrob.tv`,
-	Source:    `git@github.com:rwxrob/z.git`,
-	Issues:    `github.com/rwxrob/z/issues`,
-
-	Commands: []*Z.Cmd{
-		help.Cmd, conf.Cmd, vars.Cmd, y2j.Cmd, twitch.Cmd, tmux, yq.Cmd, golang,
-		uniq.Cmd, //github.Cmd, //update.Cmd,
 	},
 
 	Dynamic: template.FuncMap{

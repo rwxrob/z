@@ -3,21 +3,22 @@ go 1.19
 use (
 	.
 	../bonzai
+	../compcmd
 	../conf
 	../fn
 	../fs
 	../github
 	../help
+	../json
+	../pomo
 	../scan
 	../term
 	../to
 	../twitch
-	../compcmd
 	../uniq
 	../update
 	../vars
 	../web
 	../y2j
-	../json
 	../yq
 )
