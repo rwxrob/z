@@ -2,10 +2,10 @@ package main
 
 import (
 	"log"
-	"text/template"
 
 	Z "github.com/rwxrob/bonzai/z"
 	"github.com/rwxrob/conf"
+	"github.com/rwxrob/goutil"
 	"github.com/rwxrob/help"
 	"github.com/rwxrob/pomo"
 	"github.com/rwxrob/twitch"
@@ -13,7 +13,14 @@ import (
 	"github.com/rwxrob/vars"
 	"github.com/rwxrob/y2j"
 	"github.com/rwxrob/yq"
+	"github.com/rwxrob/z/git"
+	"github.com/rwxrob/z/tmux"
 )
+
+func init() {
+	Z.Dynamic["uname"] = func() string { return Z.Out("uname", "-a") }
+	Z.Dynamic["ls"] = func() string { return Z.Out("ls", "-l", "-h") }
+}
 
 func main() {
 
@@ -48,7 +55,6 @@ func main() {
 var Cmd = &Z.Cmd{
 	Name:      `z`,
 	Summary:   `rwxrob's bonzai command tree`,
-	Version:   `v0.4.0`,
 	Copyright: `Copyright 2021 Robert S Muhlestein`,
 	License:   `Apache-2.0`,
 	Site:      `rwxrob.tv`,
@@ -56,15 +62,16 @@ var Cmd = &Z.Cmd{
 	Issues:    `github.com/rwxrob/z/issues`,
 
 	Commands: []*Z.Cmd{
-		help.Cmd, conf.Cmd, vars.Cmd, y2j.Cmd, twitch.Cmd, tmux, yq.Cmd, golang,
-		uniq.Cmd, pomo.Cmd, //github.Cmd, //update.Cmd,
+		help.Cmd, conf.Cmd, vars.Cmd,
+		y2j.Cmd, twitch.Cmd, tmux.Cmd, yq.Cmd, goutil.Cmd,
+		uniq.Cmd, pomo.Cmd, git.Cmd, //github.Cmd, //update.Cmd,
 	},
 
 	Shortcuts: Z.ArgMap{
 		"project":   {"twitch", "bot", "commands", "edit", "project"},
 		"status":    {"tmux", "update"},
 		"offscreen": {"chat", "!offscreen"},
-		"commands":  {"twitch", "bot", "commands", "file", "edit"},
+		"info":      {"twitch", "bot", "commands", "file", "edit"},
 		"sync":      {"twitch", "bot", "commands", "sync"},
 		"work":      {"go", "work"},
 		"chat":      {"twitch", "chat"},
@@ -75,17 +82,12 @@ var Cmd = &Z.Cmd{
 		"epoch":     {"uniq", "second"},
 	},
 
-	Dynamic: template.FuncMap{
-		"uname": func() string { return Z.Out("uname", "-a") },
-		"ls":    func() string { return Z.Out("ls", "-l", "-h") },
-	},
-
 	Description: `
-		Hi, I'm rwxrob.tv and this is my Bonzai™ tree. I am slowly
-		replacing all my shell scripts and other Go utilities with Bonzai
-		branches that I graft into this {{cmd .Name}} command. You are welcome
-		to play around with it, but please know that I am radically changing
-		things *daily*.
+		Hi, I'm rwxrob.tv and this {{cmd .Name }} is my Bonzai™ tree. I am
+		slowly replacing all my shell scripts and other Go utilities with
+		Bonzai branches that I graft into this {{cmd .Name}} command. You
+		are welcome to play around with it, but please know that I am
+		radically changing things *daily*.
 
 		Also check out https://github.com/rwxrob/foo for a sample template
 		Bonzai tree to get started on your own.

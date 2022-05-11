@@ -1,4 +1,4 @@
-package main
+package tmux
 
 import (
 	"os"
@@ -10,13 +10,13 @@ import (
 	"github.com/rwxrob/vars"
 )
 
-var tmux = &Z.Cmd{
+var Cmd = &Z.Cmd{
 	Name:     `tmux`,
 	Summary:  `make tmux updates`,
-	Commands: []*Z.Cmd{help.Cmd, tmuxUpdate, vars.Cmd, in},
+	Commands: []*Z.Cmd{help.Cmd, vars.Cmd, updateCmd, inCmd},
 }
 
-var in = &Z.Cmd{
+var inCmd = &Z.Cmd{
 	Name:     `in`,
 	Summary:  `exec a nested tmux session (unset TMUX)`,
 	Usage:    `[help|<tmuxarg>...]`,
@@ -35,7 +35,7 @@ var in = &Z.Cmd{
 	},
 }
 
-var tmuxUpdate = &Z.Cmd{
+var updateCmd = &Z.Cmd{
 	Name:    `update`,
 	Summary: `update the onscreen status`,
 	Call: func(_ *Z.Cmd, args ...string) error {
