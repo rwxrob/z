@@ -5,8 +5,9 @@ import (
 
 	Z "github.com/rwxrob/bonzai/z"
 	"github.com/rwxrob/conf"
-	"github.com/rwxrob/goutil"
+	"github.com/rwxrob/github"
 	"github.com/rwxrob/help"
+	"github.com/rwxrob/kube"
 	"github.com/rwxrob/pomo"
 	"github.com/rwxrob/twitch"
 	"github.com/rwxrob/uniq"
@@ -63,8 +64,9 @@ var Cmd = &Z.Cmd{
 
 	Commands: []*Z.Cmd{
 		help.Cmd, conf.Cmd, vars.Cmd,
-		y2j.Cmd, twitch.Cmd, tmux.Cmd, yq.Cmd, goutil.Cmd,
-		uniq.Cmd, pomo.Cmd, git.Cmd, //github.Cmd, //update.Cmd,
+		y2j.Cmd, twitch.Cmd, tmux.Cmd, yq.Cmd, //goutil.Cmd,
+		uniq.Cmd, pomo.Cmd, github.Cmd, git.Cmd, //update.Cmd,
+		kube.Cmd,
 	},
 
 	Shortcuts: Z.ArgMap{
