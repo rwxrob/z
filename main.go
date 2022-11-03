@@ -7,6 +7,7 @@ import (
 	"github.com/rwxrob/conf"
 	"github.com/rwxrob/github"
 	"github.com/rwxrob/help"
+	"github.com/rwxrob/keg"
 	"github.com/rwxrob/kube"
 	"github.com/rwxrob/pomo"
 	"github.com/rwxrob/twitch"
@@ -14,6 +15,7 @@ import (
 	"github.com/rwxrob/vars"
 	"github.com/rwxrob/y2j"
 	"github.com/rwxrob/yq"
+	"github.com/rwxrob/z/env"
 	"github.com/rwxrob/z/git"
 	"github.com/rwxrob/z/tmux"
 )
@@ -50,7 +52,6 @@ func main() {
 	*/
 
 	Cmd.Run()
-
 }
 
 var Cmd = &Z.Cmd{
@@ -64,9 +65,10 @@ var Cmd = &Z.Cmd{
 
 	Commands: []*Z.Cmd{
 		help.Cmd, conf.Cmd, vars.Cmd,
-		y2j.Cmd, twitch.Cmd, tmux.Cmd, yq.Cmd, //goutil.Cmd,
-		uniq.Cmd, pomo.Cmd, github.Cmd, git.Cmd, //update.Cmd,
-		kube.Cmd,
+		y2j.Cmd, twitch.Cmd, tmux.Cmd, yq.Cmd,
+		uniq.Cmd, pomo.Cmd, github.Cmd, git.Cmd,
+		kube.Cmd, env.Cmd, keg.Cmd,
+		// openapi.Cmd, update.Cmd, goutil.Cmd
 	},
 
 	Shortcuts: Z.ArgMap{
@@ -82,6 +84,7 @@ var Cmd = &Z.Cmd{
 		"isonan":    {"uniq", "isonan"},
 		"uuid":      {"uniq", "uuid"},
 		"epoch":     {"uniq", "second"},
+		"path":      {"env", "get", "path"},
 	},
 
 	Description: `
@@ -90,17 +93,17 @@ var Cmd = &Z.Cmd{
 		Bonzai branches that I graft into this {{cmd .Name}} command. You
 		are welcome to play around with it, but please know that I am
 		radically changing things *daily*.
-
+		
 		Also check out https://github.com/rwxrob/foo for a sample template
 		Bonzai tree to get started on your own.
-
+		
 		Here's some random output from the Dynamic *ls* function piped to
 		the builtin *indent* function using {{ "{{ ls | indent 4 }}" }} Go
 		template syntax:
-
+		
 		{{ ls | indent 4 }}
 		
 		That was a verbatim block because of the indent.
-
+		
 		`,
 }
