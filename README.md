@@ -3,14 +3,7 @@
 [![GoDoc](https://godoc.org/github.com/rwxrob/cmds?status.svg)](https://godoc.org/github.com/rwxrob/z)
 [![License](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](LICENSE)
 
-These days I prefer to maintain a single Go monolith command utility
-rather than a ton of shell scripts in whatever languages. In fact, I
-created [Bonzai](https://github.com/rwxrob/bonzai) specifically for this
-sort of thing. I just `curl` down a single binary to whatever system I'm
-on and I have all of my favorite functionality on *any* device with zero
-compatibility hassles and installation dependencies. Everything just
-works, *anywhere*. To update just make sure you have an Internet
-connection and `z update`.
+These days I prefer to maintain a single Go [stateful command tree monolith](https://rwxrob.github.io/zet/1729/) tool rather than a ton of shell scripts in whatever languages. In fact, I created [Bonzai](https://github.com/rwxrob/bonzai) specifically for this sort of thing. I just `curl` down a single binary to whatever system I'm on and I have all of my favorite functionality on *any* device with zero compatibility hassles and installation dependencies. Everything just works, *anywhere*.
 
 ## Install
 
@@ -28,7 +21,7 @@ device and it doesn't take too much space when using UNIX pipelines and
 such:
 
 ```
-echo $(z isosec) $(z yaml2json quotes.yaml | jq -r .mad )
+echo $(z isosec) $(z y2j quotes.yaml | jq -r .mad )
 ```
 
 ## Tab Completion
