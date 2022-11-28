@@ -4,13 +4,13 @@ These days I prefer to maintain a single Go [stateful command tree monolith](htt
 
 ## Install
 
-Note: you'll have to remove `go.work` yourself if you want to use this
-build yourself (or clone all my structure the same way). I'm saving my
-`go.work` in this Go repo only because it is a personal build.
-
 ```
 go install github.com/rwxrob/z@latest
 ```
+
+Note: you'll have to remove `go.work` yourself if you want to use this
+build yourself (or clone all my structure the same way). I'm saving my
+`go.work` in this Go repo only because it is a personal build.
 
 I prefer to use `z` instead of setting up a multicall binary since the
 habits it builds into my muscle memory work on any operating system or
