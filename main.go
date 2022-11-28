@@ -60,6 +60,7 @@ var Cmd = &Z.Cmd{
 	Name:      `z`,
 	Summary:   `rwxrob's bonzai command tree`,
 	Copyright: `Copyright 2021 Robert S Muhlestein`,
+	Version:   `v0.1.0`,
 	License:   `Apache-2.0`,
 	Site:      `rwxrob.tv`,
 	Source:    `git@github.com:rwxrob/z.git`,
