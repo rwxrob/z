@@ -40,5 +40,5 @@ Releases are built using the following commands:
 ```
 z go build
 gh release create
-gh release upload build/*
+gh release upload TAG build/*
 ```
