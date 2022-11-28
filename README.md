@@ -32,3 +32,13 @@ If you don't have bash or tab completion check use the shortcut commands instead
 ## Embedded Documentation
 
 All documentation (like manual pages) has been embedded into the source code of the application. See the source or run the program with help to access it.
+
+## Building
+
+Releases are built using the following commands:
+
+```
+z go build
+gh release create
+gh release upload build/*
+```
