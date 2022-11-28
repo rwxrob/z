@@ -4,7 +4,16 @@ These days I prefer to maintain a single Go [stateful command tree monolith](htt
 
 ## Install
 
-Just download one of the [release binaries](https://github.com/rwxrob/z/releases) (built with `z go build`) or install directly with `go`:
+Just download one of the [release binaries](https://github.com/rwxrob/z/releases):
+
+```
+curl -L https://github.com/rwxrob/z/releases/latest/download/z-linux-amd64 -o ~/.local/bin/rwxrobz
+curl -L https://github.com/rwxrob/z/releases/latest/download/z-darwin-amd64 -o ~/.local/bin/rwxrobz
+curl -L https://github.com/rwxrob/z/releases/latest/download/z-darwin-arm64 -o ~/.local/bin/rwxrobz
+curl -L https://github.com/rwxrob/z/releases/latest/download/z-windows-amd64 -o ~/.local/bin/rwxrobz
+```
+
+Or install directly with `go`:
 
 ```
 go install github.com/rwxrob/z@latest
