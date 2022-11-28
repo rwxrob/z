@@ -6,10 +6,12 @@ import (
 	Z "github.com/rwxrob/bonzai/z"
 	"github.com/rwxrob/conf"
 	"github.com/rwxrob/github"
+	"github.com/rwxrob/good"
 	"github.com/rwxrob/help"
 	"github.com/rwxrob/keg"
 	"github.com/rwxrob/kube"
 	"github.com/rwxrob/pomo"
+	"github.com/rwxrob/slug"
 	"github.com/rwxrob/twitch"
 	"github.com/rwxrob/uniq"
 	"github.com/rwxrob/vars"
@@ -67,24 +69,26 @@ var Cmd = &Z.Cmd{
 		help.Cmd, conf.Cmd, vars.Cmd,
 		y2j.Cmd, twitch.Cmd, tmux.Cmd, yq.Cmd,
 		uniq.Cmd, pomo.Cmd, github.Cmd, git.Cmd,
-		kube.Cmd, env.Cmd, keg.Cmd,
+		kube.Cmd, env.Cmd, keg.Cmd, slug.Cmd, good.Cmd,
 		// openapi.Cmd, update.Cmd, goutil.Cmd
 	},
 
 	Shortcuts: Z.ArgMap{
-		"project":   {"twitch", "bot", "commands", "edit", "project"},
-		"status":    {"tmux", "update"},
-		"offscreen": {"chat", "!offscreen"},
-		"info":      {"twitch", "bot", "commands", "file", "edit"},
-		"sync":      {"twitch", "bot", "commands", "sync"},
-		"work":      {"go", "work"},
-		"chat":      {"twitch", "chat"},
-		"afk":       {"twitch", "chat", "!afk"},
-		"isosec":    {"uniq", "isosec"},
-		"isonan":    {"uniq", "isonan"},
-		"uuid":      {"uniq", "uuid"},
-		"epoch":     {"uniq", "second"},
-		"path":      {"env", "get", "path"},
+		`project`:              {`twitch`, `bot`, `commands`, `edit`, `project`},
+		`status`:               {`tmux`, `update`},
+		`offscreen`:            {`chat`, `!offscreen`},
+		`info`:                 {`twitch`, `bot`, `commands`, `file`, `edit`},
+		`sync`:                 {`twitch`, `bot`, `commands`, `sync`},
+		`work`:                 {`go`, `work`},
+		`chat`:                 {`twitch`, `chat`},
+		`afk`:                  {`twitch`, `chat`, `!afk`},
+		`isosec`:               {`uniq`, `isosec`},
+		`isonan`:               {`uniq`, `isonan`},
+		`isodate`:              {`uniq`, `isodate`},
+		`uuid`:                 {`uniq`, `uuid`},
+		`epoch`:                {`uniq`, `second`},
+		`path`:                 {`env`, `get`, `path`},
+		`long version of path`: {`env`, `get`, `path`},
 	},
 
 	Description: `
