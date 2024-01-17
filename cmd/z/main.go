@@ -1,7 +1,14 @@
 package main
 
-import "github.com/rwxrob/z"
+import (
+	"os"
+
+	"github.com/rwxrob/z"
+)
 
 func main() {
-	z.Cmd.Execute()
+	err := z.Cmd.Execute()
+	if err != nil {
+		os.Exit(1)
+	}
 }
