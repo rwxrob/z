@@ -8,7 +8,6 @@ import (
 	"github.com/rwxrob/conf"
 	"github.com/rwxrob/filter"
 	"github.com/rwxrob/github"
-	"github.com/rwxrob/good"
 	"github.com/rwxrob/grep"
 	"github.com/rwxrob/help"
 	"github.com/rwxrob/keg"
@@ -74,7 +73,7 @@ var Cmd = &Z.Cmd{
 		y2j.Cmd, twitch.Cmd, tmux.Cmd, yq.Cmd,
 		uniq.Cmd, pomo.Cmd, github.Cmd, git.Cmd,
 		kube.Cmd, env.Cmd, keg.Cmd, slug.Cmd,
-		good.Cmd, grep.Cmd, filter.Cmd, bon.Cmd,
+		grep.Cmd, filter.Cmd, bon.Cmd,
 
 		// openapi.Cmd, update.Cmd, goutil.Cmd
 	},
